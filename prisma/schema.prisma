@@ -34,17 +34,17 @@ model Foods {
   user_id Int
   user    Users @relation(fields: [user_id], references: [id])
 
-  created_at         DateTime             @default(now())
-  updated_at         DateTime?
-  FoodsOnIngredients FoodsOnIngredients[]
+  created_at  DateTime             @default(now())
+  updated_at  DateTime?
+  ingredients FoodsOnIngredients[]
 
   @@map("foods")
 }
 
 model Ingredients {
-  id                 Int                  @id @default(autoincrement())
-  name               String
-  FoodsOnIngredients FoodsOnIngredients[]
+  id    Int                  @id @default(autoincrement())
+  name  String
+  foods FoodsOnIngredients[]
 
   @@map("ingredients")
 }
