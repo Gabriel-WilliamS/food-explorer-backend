@@ -19,4 +19,23 @@ model Users {
   is_admin   Boolean   @default(false)
   created_at DateTime  @default(now())
   updated_at DateTime?
+  Foods      Foods[]
+
+  @@map("users")
+}
+
+model Foods {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  image       String
+
+  user_id Int
+  user    Users @relation(fields: [user_id], references: [id])
+
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+
+  @@map("foods")
 }
