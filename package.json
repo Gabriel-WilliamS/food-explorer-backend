@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,16 @@
   "bugs": {
     "url": "https://github.com/Gabriel-WilliamS/food-explorer-backend/issues"
   },
-  "homepage": "https://github.com/Gabriel-WilliamS/food-explorer-backend#readme"
+  "homepage": "https://github.com/Gabriel-WilliamS/food-explorer-backend#readme",
+  "dependencies": {
+    "@prisma/client": "^4.1.1",
+    "bcrypt": "^5.0.1",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.19"
+  },
+  "devDependencies": {
+    "prisma": "^4.1.1"
+  }
 }
