@@ -15,7 +15,7 @@ function ensureAuthenticateUser(request, response, next) {
   try {
     const { sub } = verify(token, auth.jwt.secret);
 
-    response.user_id = sub;
+    request.user_id = sub;
 
     return next();
   } catch (error) {
