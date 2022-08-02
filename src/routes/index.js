@@ -8,6 +8,8 @@ const userRouter = require("./user.routes");
 const foodRouter = require("./food.routes");
 
 routes.use("/users", userRouter);
+
+routes.use(ensureAuthenticateUser);
 routes.use("/foods", foodRouter);
 
 module.exports = routes;
