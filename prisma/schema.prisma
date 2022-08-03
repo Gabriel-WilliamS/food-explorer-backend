@@ -44,6 +44,7 @@ model Foods {
 model Ingredients {
   id    Int                  @id @default(autoincrement())
   name  String
+  image String?
   foods FoodsOnIngredients[]
 
   @@map("ingredients")
@@ -56,5 +57,5 @@ model FoodsOnIngredients {
   ingredient    Ingredients @relation(fields: [ingredient_id], references: [id])
 
   @@id([food_id, ingredient_id])
-  @@map("foodsoOnIngredients")
+  @@map("foodsOnIngredients")
 }
