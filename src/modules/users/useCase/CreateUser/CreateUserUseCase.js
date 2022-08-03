@@ -4,6 +4,10 @@ const AppError = require("../../../../utils/AppError");
 
 class CreateUserUseCase {
   async execute({ name, email, password, is_admin }) {
+    if (!name || !email || !password) {
+      throw new AppError("All fields must be filled.");
+    }
+
     const userExists = await prisma.users.findFirst({
       where: {
         email
