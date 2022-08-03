@@ -1,7 +1,7 @@
 const { verify } = require("jsonwebtoken");
 const auth = require("../config/auth");
 
-function ensureAuthenticateUser(request, response, next) {
+function ensureAuthenticateAdmin(request, response, next) {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -11,9 +11,8 @@ function ensureAuthenticateUser(request, response, next) {
   }
 
   const [, token] = authHeader.split(" ");
-
   try {
-    const { sub } = verify(token, auth.jwt.secretUser);
+    const { sub } = verify(token, auth.jwt.secretAdmin);
 
     request.user_id = sub;
 
@@ -23,4 +22,4 @@ function ensureAuthenticateUser(request, response, next) {
   }
 }
 
-module.exports = ensureAuthenticateUser;
+module.exports = ensureAuthenticateAdmin;

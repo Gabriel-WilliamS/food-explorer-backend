@@ -3,7 +3,7 @@ const prisma = require("../../../../database/prismaClient");
 const AppError = require("../../../../utils/AppError");
 
 class CreateUserUseCase {
-  async execute({ name, email, password }) {
+  async execute({ name, email, password, is_admin }) {
     const userExists = await prisma.users.findFirst({
       where: {
         email
@@ -19,7 +19,8 @@ class CreateUserUseCase {
       data: {
         name,
         email,
-        password: passwordHashed
+        password: passwordHashed,
+        is_admin
       }
     });
 

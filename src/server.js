@@ -6,8 +6,6 @@ const routes = require("./routes");
 
 const app = express();
 
-const teste = Router();
-
 app.use(express.json());
 
 app.use(routes);

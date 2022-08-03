@@ -4,7 +4,7 @@ const auth = require("../../../config/auth");
 const prisma = require("../../../database/prismaClient");
 const AppError = require("../../../utils/AppError");
 
-class UserAuthenticateUseCase {
+class AdminAuthenticateUseCase {
   async execute({ email, password }) {
     if (!email || !password) {
       throw new AppError("All fields must be filled.");
@@ -12,12 +12,13 @@ class UserAuthenticateUseCase {
 
     const user = await prisma.users.findFirst({
       where: {
-        email
+        email,
+        is_admin: true
       }
     });
 
     if (!user) {
-      throw new AppError("Email or password is Invalidaaaaaa.");
+      throw new AppError("Email or password is Invalid.");
     }
 
     const passwordMatch = await compare(password, user.password);
@@ -26,7 +27,7 @@ class UserAuthenticateUseCase {
       throw new AppError("Email or password is Invalid.");
     }
 
-    const token = sign({ email }, auth.jwt.secretUser, {
+    const token = sign({ email }, auth.jwt.secretAdmin, {
       subject: String(user.id),
       expiresIn: auth.jwt.expiresIn
     });
@@ -35,4 +36,4 @@ class UserAuthenticateUseCase {
   }
 }
 
-module.exports = UserAuthenticateUseCase;
+module.exports = AdminAuthenticateUseCase;
