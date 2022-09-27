@@ -17,7 +17,7 @@ class UserAuthenticateUseCase {
     });
 
     if (!user) {
-      throw new AppError("Email or password is Invalidaaaaaa.");
+      throw new AppError("Email or password is Invalid.");
     }
 
     const passwordMatch = await compare(password, user.password);
