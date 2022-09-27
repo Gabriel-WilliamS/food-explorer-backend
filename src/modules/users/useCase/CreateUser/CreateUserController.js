@@ -2,15 +2,14 @@ const CreateUserUseCase = require("./CreateUserUseCase");
 
 class CreateUserController {
   async handle(request, response) {
-    const { name, email, password, is_admin } = request.body;
+    const { name, email, password } = request.body;
 
     const createUserUseCase = new CreateUserUseCase();
 
     const user = await createUserUseCase.execute({
       name,
       email,
-      password,
-      is_admin
+      password
     });
 
     response.json(user);

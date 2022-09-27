@@ -2,7 +2,7 @@ const { hash } = require("bcrypt");
 const prisma = require("../../../../database/prismaClient");
 const AppError = require("../../../../utils/AppError");
 
-class CreateUserUseCase {
+class CreateAdminUseCase {
   async execute({ name, email, password }) {
     if (!name || !email || !password) {
       throw new AppError("All fields must be filled.");
@@ -24,7 +24,7 @@ class CreateUserUseCase {
         name,
         email,
         password: passwordHashed,
-        is_admin: false
+        is_admin: true
       }
     });
 
@@ -32,4 +32,4 @@ class CreateUserUseCase {
   }
 }
 
-module.exports = CreateUserUseCase;
+module.exports = CreateAdminUseCase;

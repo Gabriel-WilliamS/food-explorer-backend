@@ -15,7 +15,6 @@ model Users {
   name       String
   email      String
   password   String
-  avatar     String    @default("https://raw.githubusercontent.com/Gabriel-WilliamS/rocketMovies/d9ca7d0472628a44d07501b4805149ce82bc8467/src/assets/avatar_placeholder.svg")
   is_admin   Boolean   @default(false)
   created_at DateTime  @default(now())
   updated_at DateTime?
@@ -34,9 +33,10 @@ model Foods {
   user_id Int
   user    Users @relation(fields: [user_id], references: [id])
 
-  created_at  DateTime             @default(now())
-  updated_at  DateTime?
-  ingredients FoodsOnIngredients[]
+  created_at        DateTime             @default(now())
+  updated_at        DateTime?
+  ingredients       FoodsOnIngredients[]
+  FoodsOnCategories FoodsOnCategories[]
 
   @@map("foods")
 }
@@ -48,6 +48,24 @@ model Ingredients {
   foods FoodsOnIngredients[]
 
   @@map("ingredients")
+}
+
+model Categories {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  FoodsOnCategories FoodsOnCategories[]
+
+  @@map("categories")
+}
+
+model FoodsOnCategories {
+  food_id       Int
+  food          Foods      @relation(fields: [food_id], references: [id])
+  categories_id Int
+  categories    Categories @relation(fields: [categories_id], references: [id])
+
+  @@id([food_id, categories_id])
+  @@map("foodsOnCategories")
 }
 
 model FoodsOnIngredients {

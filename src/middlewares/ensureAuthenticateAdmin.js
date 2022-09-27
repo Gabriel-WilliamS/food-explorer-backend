@@ -11,10 +11,19 @@ function ensureAuthenticateAdmin(request, response, next) {
   }
 
   const [, token] = authHeader.split(" ");
-  try {
-    const { sub } = verify(token, auth.jwt.secretAdmin);
 
-    request.user_id = sub;
+  try {
+    const { user_id, email, is_admin } = verify(token, auth.jwt.secretUser);
+
+    request.user = {
+      user_id,
+      email,
+      is_admin
+    };
+
+    if (!is_admin) {
+      return response.status(401).json({ message: "Invalid token" });
+    }
 
     return next();
   } catch (error) {

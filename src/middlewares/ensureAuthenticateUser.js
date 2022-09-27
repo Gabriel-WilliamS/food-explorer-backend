@@ -13,9 +13,13 @@ function ensureAuthenticateUser(request, response, next) {
   const [, token] = authHeader.split(" ");
 
   try {
-    const { sub } = verify(token, auth.jwt.secretUser);
+    const { user_id, email, is_admin } = verify(token, auth.jwt.secretUser);
 
-    request.user_id = sub;
+    request.user = {
+      user_id,
+      email,
+      is_admin
+    };
 
     return next();
   } catch (error) {

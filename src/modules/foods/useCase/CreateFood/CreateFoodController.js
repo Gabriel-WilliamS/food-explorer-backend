@@ -1,30 +1,27 @@
-const AppError = require("../../../../utils/AppError");
 const CreateFoodUseCase = require("./CreateFoodUseCase");
 
 class CreateFoodController {
   async handle(request, response) {
-    const { name, description, price, image, ingredients } = request.body;
+    const { name, description, price, ingredients } = request.body;
+    const image = request.file;
+    let { user } = request;
 
-    let { user_id } = request;
+    // const newIngredients = await ingredients.split(",");
 
-    if (!name || !description || !price || !image || !ingredients) {
-      throw new AppError("All fields must be filled.");
-    }
+    // const createFoodUseCase = new CreateFoodUseCase();
 
-    const createFoodUseCase = new CreateFoodUseCase();
+    // const ingredientsLowerCase = newIngredients.map((i) => i.toLowerCase());
 
-    const ingredientsLowerCase = ingredients.map((i) => i.toLowerCase());
+    // const food = await createFoodUseCase.execute({
+    //   name,
+    //   description,
+    //   price: parseFloat(price),
+    //   image,
+    //   ingredients: ingredientsLowerCase,
+    //   user_id: Number(user_id)
+    // });
 
-    const food = await createFoodUseCase.execute({
-      name,
-      description,
-      price,
-      image,
-      ingredients: ingredientsLowerCase,
-      user_id: Number(user_id)
-    });
-
-    response.json(food);
+    response.json(user);
   }
 }
 

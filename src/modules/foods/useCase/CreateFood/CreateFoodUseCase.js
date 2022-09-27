@@ -1,7 +1,29 @@
 const prisma = require("../../../../database/prismaClient");
+const DiskStorage = require("../../../../providers/DiskStorage");
+const AppError = require("../../../../utils/AppError");
 
 class CreateFoodUseCase {
   async execute({ name, description, price, image, ingredients, user_id }) {
+    if (!description) {
+      throw new AppError("Description field is empty.");
+    }
+
+    if (!price) {
+      throw new AppError("Price field is empty.");
+    }
+
+    if (!image) {
+      throw new AppError("Image field is empty.");
+    }
+
+    if (!ingredients) {
+      throw new AppError("Ingredients field is empty.");
+    }
+
+    const diskStorage = new DiskStorage();
+
+    const filename = await diskStorage.saveFile(image.filename);
+
     const fetchIngredients = await prisma.ingredients.findMany({
       where: {
         name: { in: ingredients }
@@ -47,7 +69,7 @@ class CreateFoodUseCase {
         name,
         description,
         price,
-        image,
+        image: filename,
         user_id,
         ingredients: {
           create: createIngredients

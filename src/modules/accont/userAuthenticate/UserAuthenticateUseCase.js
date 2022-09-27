@@ -26,10 +26,13 @@ class UserAuthenticateUseCase {
       throw new AppError("Email or password is Invalid.");
     }
 
-    const token = sign({ email }, auth.jwt.secretUser, {
-      subject: String(user.id),
-      expiresIn: auth.jwt.expiresIn
-    });
+    const token = sign(
+      { user_id: user.id, email, is_admin: user.is_admin },
+      auth.jwt.secretUser,
+      {
+        expiresIn: auth.jwt.expiresIn
+      }
+    );
 
     return { user, token };
   }

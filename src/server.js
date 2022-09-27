@@ -3,14 +3,17 @@ const AppError = require("./utils/AppError");
 const { Router } = require("express");
 const express = require("express");
 const routes = require("./routes");
-
+const cors = require("cors");
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use(routes);
 
 app.use((error, request, response, next) => {
+  console.log(error);
+
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
       status: error.statusCode,
