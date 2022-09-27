@@ -13,7 +13,6 @@ class CreateCategoryUseCase {
       }
     });
 
-    console.log(categoryAlreadyExists);
     if (categoryAlreadyExists) {
       throw new AppError("Category already exists.");
     }

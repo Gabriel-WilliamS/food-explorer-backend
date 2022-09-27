@@ -52,7 +52,7 @@ model Ingredients {
 
 model Categories {
   id                Int                 @id @default(autoincrement())
-  name              String
+  name              String              @unique
   FoodsOnCategories FoodsOnCategories[]
 
   @@map("categories")
