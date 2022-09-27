@@ -2,7 +2,7 @@ const AppError = require("../../../../utils/AppError");
 const EditCategoryUseCase = require("./EditCategoryUseCase");
 
 class EditCategoryController {
-  async handle(request, response, next) {
+  async handle(request, response) {
     const { name } = request.body;
     const { id } = request.params;
 
