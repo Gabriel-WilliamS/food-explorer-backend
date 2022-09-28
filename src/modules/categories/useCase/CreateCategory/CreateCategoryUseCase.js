@@ -19,7 +19,7 @@ class CreateCategoryUseCase {
 
     const createCategory = await prisma.categories.create({
       data: {
-        name
+        name: name.toLowerCase().trim()
       }
     });
 

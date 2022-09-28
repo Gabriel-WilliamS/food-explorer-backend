@@ -6,8 +6,7 @@ class CreateCategoryController {
 
     const createCategoryUseCase = new CreateCategoryUseCase();
 
-    const newCategory = name.toLowerCase().trim();
-    const category = await createCategoryUseCase.execute({ name: newCategory });
+    const category = await createCategoryUseCase.execute({ name });
     response.json({ category });
   }
 }
