@@ -33,10 +33,10 @@ model Foods {
   user_id Int
   user    Users @relation(fields: [user_id], references: [id])
 
-  created_at        DateTime             @default(now())
-  updated_at        DateTime?
-  ingredients       FoodsOnIngredients[]
-  FoodsOnCategories FoodsOnCategories[]
+  created_at  DateTime             @default(now())
+  updated_at  DateTime?
+  ingredients FoodsOnIngredients[]
+  categories  FoodsOnCategories[]
 
   @@map("foods")
 }

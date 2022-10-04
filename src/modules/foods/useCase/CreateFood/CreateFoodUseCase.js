@@ -3,7 +3,15 @@ const DiskStorage = require("../../../../providers/DiskStorage");
 const AppError = require("../../../../utils/AppError");
 
 class CreateFoodUseCase {
-  async execute({ name, description, price, image, ingredients, user_id }) {
+  async execute({
+    name,
+    description,
+    price,
+    image,
+    ingredients,
+    user_id,
+    category
+  }) {
     if (!description) {
       throw new AppError("Description field is empty.");
     }
@@ -73,6 +81,17 @@ class CreateFoodUseCase {
         user_id,
         ingredients: {
           create: createIngredients
+        },
+        categories: {
+          create: [
+            {
+              categories: {
+                connect: {
+                  id: category
+                }
+              }
+            }
+          ]
         }
       }
     });
