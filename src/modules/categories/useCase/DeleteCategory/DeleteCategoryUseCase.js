@@ -17,13 +17,17 @@ class DeleteCategoryUseCase {
       throw new AppError("Error deleting category.");
     }
 
-    const category = await prisma.categories.delete({
-      where: {
-        id: parseInt(id)
-      }
-    });
+    try {
+      const category = await prisma.categories.delete({
+        where: {
+          id: parseInt(id)
+        }
+      });
 
-    return category;
+      return category;
+    } catch (error) {
+      return error;
+    }
   }
 }
 
